@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'board/base.html' %}
 
 {% block head_title %}
     {{ post.title }} - Board
@@ -33,6 +33,7 @@
 {#            <figure class="mb-4"><img class="img-fluid rounded" src="https://picsum.photos/seed/{{ post.id }}/850/350" alt="random_image" /></figure>#}
         {% endif %}
         <!-- Post content-->
+        <p> {{ post.content }}</p>
         <p>{{ post.get_content_markdown | safe }}</p>
 
         {% if post.file_upload %}

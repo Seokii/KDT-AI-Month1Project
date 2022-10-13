@@ -1,0 +1,76 @@
+{% extends 'board/base.html' %}
+{% block main_area %}
+    <br><br>
+  <div class="container clearfix">
+    <h1>심심해서 만들어본 게시판</h1>
+    <span class="hidden-xs hidden-sm ">  </span>
+  </div>
+</section>
+</section>
+    <br>
+<div class="board_list_wrap">
+    <table class="board_list table table-striped table-hover" style="border-top: 2px solid;border-bottom: 2px solid;">
+    <thead>
+    <tr>
+        <th style="width: 10%; text-align: center;">번호</th>
+        <th style="width: 50%; text-align: center;">제목</th>
+        <th style="width: 10%; text-align: center;">작성자</th>
+        <th style="width: 20%; text-align: center;">날짜</th>
+    </tr>
+    </thead>
+        <tbody class="table-group-divider">
+        {% if post_list.exists %}
+            {% for p in post_list %}
+                <tr class="{% if forloop.counter %}{% endif %}">
+                    <td style="text-align:center;">{{ forloop.counter }}</td>
+                    <td style="text-align:left; "><a style="color:black;" href="{{ p.get_absolute_url }}" >{{ p.title }}</a></td>
+                    <td style="text-align:center;">{{ p.author | upper }}</td>
+                    <td style="text-align:center;">{{ p.created_at }}</td>
+                </tr>
+                {% endfor %}
+        {% else %}
+            <h3>아직 게시물이 없습니다!</h3>
+            <br>
+            <br>
+        {% endif %}
+        </tbody>
+    </table>
+{#    <div class="page-1">#}
+{#        <a href="#">첫 페이지</a>#}
+{#        <a href="#">이전 페이지</a>#}
+{#        <a href="#">1</a>#}
+{#        <a href="#" style="">2</a>#}
+{#        <a href="#" style="">3</a>#}
+{#        <a href="#" style="">다음 페이지</a>#}
+{#        <a href="#" style="">마지막 페이지</a>#}
+{#    </div>#}
+    {% if is_paginated %}
+    <!-- Pagination -->
+    <ul class="pagination justify-content-center my-4">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">이전</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">이전</a>
+            </li>
+        {% endif %}
+
+        <h5>&nbsp;{{ page_obj }}&nbsp;</h5>
+
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">다음</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">다음</a>
+            </li>
+        {% endif %}
+
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}
+
