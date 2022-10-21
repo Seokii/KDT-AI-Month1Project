@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>About me</title>
+    <link rel="stylesheet" href="{% static 'single_pages/bootstrap/css/styles.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'single_pages/css/about_me.css' %}" media="screen">
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+{% include 'board/navbar.html' %}
+<br>
+
+<div class="d-flex justify-content-center" style="margin-top: 50px;">
+<form action="/predict/" method="POST">
+    {% csrf_token %}
+    <h2 style="margin-bottom: 30px;"> Titanic Prediction Model(구현 중..)</h2>
+    <p class="lead" style="margin-bottom: 30px;">
+        타이타닉 탑승자의 정보를 입력하고, 생존 예측을 진행해보세요!<br>
+        예측에 사용되는 모델은 KNN, Decision Tree, Random Forest 입니다.<br>
+        XGBoost, LightGBM 등의 모델은 무료 배포 사이트에 적용하기에 모델이 무겁네요 :(<br>
+    </p>
+    <!-- Age & Fare input box -->
+    {{ titanic_form.as_p }}
+
+    <!-- Sex radio box -->
+    <div class="form-check form-check-inline" style="margin-bottom: 10px;">
+      <input class="form-check-input" type="radio" name="sex" id="female" value="0" checked>
+      <label class="form-check-label" for="female">Female</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="sex" id="male" value="1">
+      <label class="form-check-label" for="male">male</label>
+    </div>
+    <br>
+
+    <!-- Is Alone radio box -->
+    <div class="form-check form-check-inline" style="margin-bottom: 10px;">
+      <input class="form-check-input" type="radio" name="IsAlone" id="alone" value="1">
+      <label class="form-check-label" for="alone">I'm alone</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="IsAlone" id="notalone" value="0" checked>
+      <label class="form-check-label" for="notalone">I'm not alone</label>
+    </div>
+    <br>
+
+    <!-- Pclass radio box -->
+    <div class="form-check form-check-inline" style="margin-bottom: 10px;">
+      <input class="form-check-input" type="radio" name="Pclass" id="1" value="1" checked>
+      <label class="form-check-label" for="1">Pclass: 1</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="Pclass" id="2" value="2">
+      <label class="form-check-label" for="2">Pclass: 2</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="Pclass" id="3" value="3">
+      <label class="form-check-label" for="3">Pclass: 3</label>
+    </div>
+    <br>
+
+    <!-- Embarked radio box -->
+    <div class="form-check form-check-inline" style="margin-bottom: 10px;">
+      <input class="form-check-input" type="radio" name="Embarked" id="S" value="0" checked>
+      <label class="form-check-label" for="S">Embarked: S</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="Embarked" id="C" value="1">
+      <label class="form-check-label" for="C">Embarked: C</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="Embarked" id="Q" value="2">
+      <label class="form-check-label" for="Q">Embarked: Q</label>
+    </div>
+    <br>
+
+    <!-- Title radio box -->
+    <div class="form-check form-check-inline" style="margin-bottom: 10px;">
+      <input class="form-check-input" type="radio" name="Title" id="Master" value="0" checked>
+      <label class="form-check-label" for="Master">Title: Master</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="Title" id="Miss" value="1">
+      <label class="form-check-label" for="Miss">Title: Miss</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="Title" id="Mr" value="2">
+      <label class="form-check-label" for="Mr">Title: Mr</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="Title" id="Mrs" value="3">
+      <label class="form-check-label" for="Mrs">Title: Mrs</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="Title" id="Rare" value="4">
+      <label class="form-check-label" for="Rare">Title: Rare (et al.)</label>
+    </div>
+    <div style="margin-top: 20px;">
+        <button type="submit" class="btn btn-primary">predict!</button>
+    </div>
+</form>
+</div>
+
+
+
+<div class="fixed-bottom">
+    {% include 'board/footer.html' %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+
+</body>
+</html>
